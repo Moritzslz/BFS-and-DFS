@@ -4,7 +4,7 @@ import java.util.*;
 
 public class BFS {
 
-	private HashMap<Integer, ArrayList<Integer>> parents;
+	private HashMap<Integer, Integer> parents;
 	private HashMap<Integer, Integer> depth;
 
 	public BFS() {
@@ -18,9 +18,7 @@ public class BFS {
 
 		queue.add(start);
 		visited.add(start);
-		ArrayList arrayList = new ArrayList<>();
-		arrayList.add(-1);
-		parents.put(start, arrayList);
+		parents.put(start, -1);
 		depth.put(start, 0);
 
 		while (!queue.isEmpty()) {
@@ -30,9 +28,7 @@ public class BFS {
 				if (!visited.contains(neighbour)) {
 					queue.add(neighbour);
 					visited.add(neighbour);
-					ArrayList nArrayList = new ArrayList<>();
-					arrayList.add(currentNode);
-					parents.put(neighbour, nArrayList);
+					parents.put(neighbour, currentNode);
 					depth.put(neighbour, getDepth(currentNode) + 1);
 				}
 			}
@@ -52,7 +48,7 @@ public class BFS {
 
 	public int getParent(int node) {
 		if (visitedNode(node)) {
-			return parents.get(node).get(0);
+			return parents.get(node);
 		}
 		return -1;
 	}
