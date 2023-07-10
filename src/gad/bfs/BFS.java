@@ -40,18 +40,16 @@ public class BFS {
 	}
 
 	public int getDepth(int node) {
-		/*if (parents.containsKey(node)) {
+		if (visitedNode(node)) {
 			return parents.get(node)[1];
 		}
-		return -1;*/
-		return parents.get(node)[1];
+		return -1;
 	}
 
 	public int getParent(int node) {
-		/*if (parents.containsKey(node)) {
+		if (visitedNode(node)) {
 			return parents.get(node)[0];
 		}
-		return -1;*/
-		return parents.get(node)[0];
+		return -1;
 	}
 }
