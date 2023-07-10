@@ -4,11 +4,9 @@ import java.util.*;
 
 public class BFS {
 
-	private int distance;
 	private HashMap<Integer, Integer[]> parents; //Index 0 = parent; Index 1 = depth
 
 	public BFS() {
-		distance = 0;
 		parents = new HashMap<>();
 	}
 
@@ -42,16 +40,18 @@ public class BFS {
 	}
 
 	public int getDepth(int node) {
-		if (parents.containsKey(node)) {
+		/*if (parents.containsKey(node)) {
 			return parents.get(node)[1];
 		}
-		return -1;
+		return -1;*/
+		return parents.get(node)[1];
 	}
 
 	public int getParent(int node) {
-		if (parents.containsKey(node)) {
+		/*if (parents.containsKey(node)) {
 			return parents.get(node)[0];
 		}
-		return -1;
+		return -1;*/
+		return parents.get(node)[0];
 	}
 }
