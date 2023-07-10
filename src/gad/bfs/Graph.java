@@ -1,28 +1,28 @@
 package gad.bfs;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 public class Graph {
 
-	private ArrayList<Integer>[] adjacencyMatrix;
+	private HashMap<Integer, ArrayList<Integer>> adjacencyMatrix;
 	private int currentNodeId;
 
 	public Graph() {
-		adjacencyMatrix = new ArrayList[1000000];
+		adjacencyMatrix = new HashMap<>();
 		currentNodeId = 0;
 	}
 
 	public int addNode() {
-		adjacencyMatrix[currentNodeId] = new ArrayList<>();
+		ArrayList<Integer> edges = new ArrayList<>();
+		adjacencyMatrix.put(currentNodeId, edges);
 		currentNodeId++;
 		return currentNodeId - 1;
 	}
 
 	public Collection<Integer> getAllNodes() {
 		ArrayList<Integer> allNodes = new ArrayList<>();
-		for (int i = 0; i < adjacencyMatrix.length; i++) {
-			if (adjacencyMatrix[i] != null) {
+		for (int i = 0; i < adjacencyMatrix.size(); i++) {
+			if (adjacencyMatrix.get(i) != null) {
 				allNodes.add(i);
 			}
 		}
@@ -30,17 +30,15 @@ public class Graph {
 	}
 
 	public Collection<Integer> getAllNeighbours(int id) {
-		ArrayList<Integer> neighbours = new ArrayList<>();
-		for (int i = 0; i < adjacencyMatrix[id].size(); i++) {
-			if (adjacencyMatrix[id].get(i) == 1) {
-				neighbours.add(i);
-			}
-		}
-		return neighbours;
+		return adjacencyMatrix.get(id);
 	}
 
 	public void addEdge(int idA, int idB) {
-		adjacencyMatrix[idA].set(idB, 1);
-		adjacencyMatrix[idB].set(idA, 1);
+		if (adjacencyMatrix.get(idA) != null && adjacencyMatrix.get(idB) != null) {
+			adjacencyMatrix.get(idA).add(idB);
+			adjacencyMatrix.get(idB).add(idA);
+		} else {
+			return;
+		}
 	}
 }
