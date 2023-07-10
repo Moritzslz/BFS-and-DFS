@@ -4,10 +4,12 @@ import java.util.*;
 
 public class BFS {
 
-	private HashMap<Integer, Integer[]> parents; //Index 0 = parent; Index 1 = depth
+	private HashMap<Integer, ArrayList<Integer>> parents;
+	private HashMap<Integer, Integer> depth;
 
 	public BFS() {
 		parents = new HashMap<>();
+		depth = new HashMap<>();
 	}
 
 	public void sssp(Graph g, int start) {
@@ -15,10 +17,11 @@ public class BFS {
 		Set<Integer> visited = new HashSet<>();
 
 		queue.add(start);
-		Integer[] array = new Integer[2];
-		array[0] = -1;
-		array[1] = 0;
-		parents.put(start, array);
+		visited.add(start);
+		ArrayList arrayList = new ArrayList<>();
+		arrayList.add(-1);
+		parents.put(start, arrayList);
+		depth.put(start, 0);
 
 		while (!queue.isEmpty()) {
 			int currentNode = queue.poll();
@@ -27,8 +30,10 @@ public class BFS {
 				if (!visited.contains(neighbour)) {
 					queue.add(neighbour);
 					visited.add(neighbour);
-					Integer[] nArray = new Integer[] {currentNode, getDepth(currentNode + 1)};
-					parents.put(neighbour, nArray);
+					ArrayList nArrayList = new ArrayList<>();
+					arrayList.add(currentNode);
+					parents.put(neighbour, nArrayList);
+					depth.put(neighbour, getDepth(currentNode) + 1);
 				}
 			}
 		}
@@ -40,14 +45,14 @@ public class BFS {
 
 	public int getDepth(int node) {
 		if (visitedNode(node)) {
-			return parents.get(node)[1];
+			return depth.get(node);
 		}
 		return -1;
 	}
 
 	public int getParent(int node) {
 		if (visitedNode(node)) {
-			return parents.get(node)[0];
+			return parents.get(node).get(0);
 		}
 		return -1;
 	}
