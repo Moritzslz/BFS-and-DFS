@@ -4,25 +4,25 @@ import java.util.*;
 
 public class Graph {
 
-	private HashMap<Integer, ArrayList<Integer>> adjacencyMatrix;
+	private HashMap<Integer, ArrayList<Integer>> adjacencyList;
 	private int currentNodeId;
 
 	public Graph() {
-		adjacencyMatrix = new HashMap<>();
+		adjacencyList = new HashMap<>();
 		currentNodeId = 0;
 	}
 
 	public int addNode() {
 		ArrayList<Integer> edges = new ArrayList<>();
-		adjacencyMatrix.put(currentNodeId, edges);
+		adjacencyList.put(currentNodeId, edges);
 		currentNodeId++;
 		return currentNodeId - 1;
 	}
 
 	public Collection<Integer> getAllNodes() {
 		ArrayList<Integer> allNodes = new ArrayList<>();
-		for (int i = 0; i < adjacencyMatrix.size(); i++) {
-			if (adjacencyMatrix.get(i) != null) {
+		for (int i = 0; i < adjacencyList.size(); i++) {
+			if (adjacencyList.get(i) != null) {
 				allNodes.add(i);
 			}
 		}
@@ -30,16 +30,16 @@ public class Graph {
 	}
 
 	public Collection<Integer> getAllNeighbours(int id) {
-		return List.copyOf(adjacencyMatrix.get(id));
+		return List.copyOf(adjacencyList.get(id));
 	}
 
 	public void addEdge(int idA, int idB) {
-		if (adjacencyMatrix.get(idA) != null && adjacencyMatrix.get(idB) != null) {
-			if (!adjacencyMatrix.get(idA).contains(idB)) {
-				adjacencyMatrix.get(idA).add(idB);
+		if (adjacencyList.get(idA) != null && adjacencyList.get(idB) != null) {
+			if (!adjacencyList.get(idA).contains(idB)) {
+				adjacencyList.get(idA).add(idB);
 			}
-			if (!adjacencyMatrix.get(idB).contains(idA)) {
-				adjacencyMatrix.get(idB).add(idA);
+			if (!adjacencyList.get(idB).contains(idA)) {
+				adjacencyList.get(idB).add(idA);
 			}
 		} else {
 			return;
