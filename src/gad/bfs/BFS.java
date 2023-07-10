@@ -27,9 +27,8 @@ public class BFS {
 				if (!visited.contains(neighbour)) {
 					queue.add(neighbour);
 					visited.add(neighbour);
-					array[0] = currentNode;
-					array[1] = getDepth(currentNode) + 1;
-					parents.put(neighbour, array);
+					Integer[] nArray = new Integer[] {currentNode, getDepth(currentNode + 1)};
+					parents.put(neighbour, nArray);
 				}
 			}
 		}
