@@ -26,17 +26,21 @@ public class Graph {
 				allNodes.add(i);
 			}
 		}
-		return allNodes;
+		return List.copyOf(allNodes);
 	}
 
 	public Collection<Integer> getAllNeighbours(int id) {
-		return adjacencyMatrix.get(id);
+		return List.copyOf(adjacencyMatrix.get(id));
 	}
 
 	public void addEdge(int idA, int idB) {
 		if (adjacencyMatrix.get(idA) != null && adjacencyMatrix.get(idB) != null) {
-			adjacencyMatrix.get(idA).add(idB);
-			adjacencyMatrix.get(idB).add(idA);
+			if (!adjacencyMatrix.get(idA).contains(idB)) {
+				adjacencyMatrix.get(idA).add(idB);
+			}
+			if (!adjacencyMatrix.get(idB).contains(idA)) {
+				adjacencyMatrix.get(idB).add(idA);
+			}
 		} else {
 			return;
 		}
