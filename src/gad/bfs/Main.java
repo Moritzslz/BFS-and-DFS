@@ -19,5 +19,7 @@ public class Main {
         BFS bfs = new BFS();
         bfs.sssp(graph, 0);
         System.out.println(bfs.getDepth(0));
+        ConnectedComponents connectedComponents = new ConnectedComponents(bfs);
+        System.out.println(connectedComponents.countConnectedComponents(graph));
     }
 }
