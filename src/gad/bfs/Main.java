@@ -8,6 +8,8 @@ public class Main {
         graph.addNode();
         graph.addNode();
         graph.addNode();
+        graph.addNode();
+        graph.addNode();
         graph.addEdge(0,1);
         graph.addEdge(0,2);
         graph.addEdge(2, 3);
@@ -19,5 +21,8 @@ public class Main {
         BFS bfs = new BFS();
         bfs.sssp(graph, 0);
         System.out.println(bfs.getDepth(0));
+
+        ConnectedComponents connectedComponents = new ConnectedComponents();
+        System.out.println(connectedComponents.countConnectedComponents(graph));
     }
 }
