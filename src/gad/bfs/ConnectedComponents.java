@@ -18,7 +18,6 @@ public class ConnectedComponents {
 		ArrayList<Integer> nodes = new ArrayList<>();
 		nodes.addAll(g.getAllNodes());
 
-
 		for (Integer node : nodes) {
 			if (!search.visitedNode(node)) {
 				search.sssp(g, node);
